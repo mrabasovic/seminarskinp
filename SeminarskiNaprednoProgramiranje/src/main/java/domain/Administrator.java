@@ -108,6 +108,10 @@ public class Administrator extends AbstractDomainObject implements Serializable 
     }
 
     public void setImeAdministratora(String imeAdministratora) {
+    	if(imeAdministratora == null)
+    		throw new NullPointerException("Ime admina ne sme biti null");
+    	if(imeAdministratora.length() < 2)
+    		throw new RuntimeException("Ime mora biti duze od 1 slova");
         this.imeAdministratora = imeAdministratora;
     }
 
@@ -116,6 +120,10 @@ public class Administrator extends AbstractDomainObject implements Serializable 
     }
 
     public void setPrezimeAdministratora(String prezimeAdministratora) {
+    	if(prezimeAdministratora == null)
+    		throw new NullPointerException("Prezime admina ne sme biti null");
+    	if(prezimeAdministratora.length() < 2)
+    		throw new RuntimeException("Prezime mora biti duze od 1 slova");
         this.prezimeAdministratora = prezimeAdministratora;
     }
 
@@ -124,6 +132,8 @@ public class Administrator extends AbstractDomainObject implements Serializable 
     }
 
     public void setUsername(String username) {
+    	if(username == null)
+    		throw new NullPointerException("Username admina ne sme biti null");
         this.username = username;
     }
 
@@ -132,6 +142,10 @@ public class Administrator extends AbstractDomainObject implements Serializable 
     }
 
     public void setPassword(String password) {
+    	if(password == null)
+    		throw new NullPointerException("Sifra admina ne sme biti null");
+    	if(password.length() < 5)
+    		throw new RuntimeException("Sifra admina ne sme biti kraca od 5 karaktera");
         this.password = password;
     }
 

@@ -102,6 +102,8 @@ public class Vodic extends AbstractDomainObject implements Serializable{
     }
 
     public void setVodicID(Long vodicID) {
+    	if(vodicID == null)
+    		throw new NullPointerException("ID vodica ne sme biti null");
         this.vodicID = vodicID;
     }
 
@@ -110,6 +112,10 @@ public class Vodic extends AbstractDomainObject implements Serializable{
     }
 
     public void setIme(String ime) {
+    	if(ime == null)
+    		throw new NullPointerException("Ime ne sme biti null!");
+    	if(ime.length() <2)
+    		throw new RuntimeException("Ime mora imati barem 2 slova");
         this.ime = ime;
     }
 
@@ -118,6 +124,10 @@ public class Vodic extends AbstractDomainObject implements Serializable{
     }
 
     public void setPrezime(String prezime) {
+    	if(prezime == null)
+    		throw new NullPointerException("Prezime ne sme biti null!");
+    	if(prezime.length() <2)
+    		throw new RuntimeException("Prezime mora imati barem 2 slova");
         this.prezime = prezime;
     }
 
@@ -126,6 +136,8 @@ public class Vodic extends AbstractDomainObject implements Serializable{
     }
 
     public void setBrojTelefona(String brojTelefona) {
+    	if(!(brojTelefona.length() == 10))
+    		throw new RuntimeException("Broj telefona mora imati 10 cifara");
         this.brojTelefona = brojTelefona;
     }
 
@@ -134,6 +146,11 @@ public class Vodic extends AbstractDomainObject implements Serializable{
     }
 
     public void setEmail(String email) {
+    	if(email == null) {
+    		throw new NullPointerException("Email ne sme biti null!");
+    	}
+    	if(!email.contains("@"))
+    		throw new RuntimeException("Email mora sadrzati znak @!");
         this.email = email;
     }
 
@@ -142,6 +159,8 @@ public class Vodic extends AbstractDomainObject implements Serializable{
     }
 
     public void setGodineIskustva(int godineIskustva) {
+    	if(godineIskustva < 0)
+    		throw new RuntimeException("Godine iskustva ne smeju biti negativan broj");
         this.godineIskustva = godineIskustva;
     }
 

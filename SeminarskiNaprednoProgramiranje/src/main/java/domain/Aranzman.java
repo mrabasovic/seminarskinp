@@ -103,6 +103,8 @@ public class Aranzman extends AbstractDomainObject implements Serializable {
     }
 
     public void setAranzmanID(Long aranzmanID) {
+    	if(aranzmanID == null)
+    		throw new NullPointerException("ID aranzmana ne sme biti null");
         this.aranzmanID = aranzmanID;
     }
 
@@ -111,6 +113,8 @@ public class Aranzman extends AbstractDomainObject implements Serializable {
     }
 
     public void setOpis(String opis) {
+    	if(opis == null)
+    		throw new NullPointerException("Opis aranzmana ne sme biti null");
         this.opis = opis;
     }
 
@@ -119,6 +123,8 @@ public class Aranzman extends AbstractDomainObject implements Serializable {
     }
 
     public void setVodic(Vodic vodic) {
+    	if(vodic == null)
+    		throw new NullPointerException("Vodic aranzmana ne sme biti null");
         this.vodic = vodic;
     }
 
@@ -127,6 +133,8 @@ public class Aranzman extends AbstractDomainObject implements Serializable {
     }
 
     public void setHotel(Hotel hotel) {
+    	if(hotel == null)
+    		throw new NullPointerException("Hotel aranzmana ne sme biti null");
         this.hotel = hotel;
     }
 
@@ -135,6 +143,8 @@ public class Aranzman extends AbstractDomainObject implements Serializable {
     }
 
     public void setTermini(ArrayList<Termin> termini) {
+    	if(termini == null)
+    		throw new NullPointerException("Termini aranzmana ne sme biti null");
         this.termini = termini;
     }
     

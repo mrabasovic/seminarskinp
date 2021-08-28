@@ -137,6 +137,8 @@ public class Termin extends AbstractDomainObject implements Serializable {
     }
 
     public void setTerminID(int terminID) {
+    	if(terminID < 0)
+    		throw new RuntimeException("ID termina ne sme biti negativan broj");
         this.terminID = terminID;
     }
 
@@ -145,6 +147,8 @@ public class Termin extends AbstractDomainObject implements Serializable {
     }
 
     public void setDatumOd(Date datumOd) {
+    	if(datumOd == null)
+    		throw new NullPointerException("DatumOd ne sme biti null");
         this.datumOd = datumOd;
     }
 
@@ -153,6 +157,8 @@ public class Termin extends AbstractDomainObject implements Serializable {
     }
 
     public void setDatumDo(Date datumDo) {
+    	if(datumDo == null)
+    		throw new NullPointerException("DatumDo ne sme biti null");
         this.datumDo = datumDo;
     }
 
@@ -161,6 +167,8 @@ public class Termin extends AbstractDomainObject implements Serializable {
     }
 
     public void setCenaBezPDV(double cenaBezPDV) {
+    	if(cenaBezPDV < 0)
+    		throw new RuntimeException("Cena mora biti pozitivan broj");
         this.cenaBezPDV = cenaBezPDV;
     }
 
@@ -169,6 +177,8 @@ public class Termin extends AbstractDomainObject implements Serializable {
     }
 
     public void setPoreskaStopa(double poreskaStopa) {
+    	if(poreskaStopa < 0)
+    		throw new RuntimeException("Poreska stopa mora biti pozitivan broj");
         this.poreskaStopa = poreskaStopa;
     }
 
@@ -177,6 +187,8 @@ public class Termin extends AbstractDomainObject implements Serializable {
     }
 
     public void setCenaSaPDV(double cenaSaPDV) {
+    	if(cenaSaPDV < 0)
+    		throw new RuntimeException("Cena mora biti pozitivan broj");
         this.cenaSaPDV = cenaSaPDV;
     }
 
@@ -185,6 +197,8 @@ public class Termin extends AbstractDomainObject implements Serializable {
     }
 
     public void setKlijent(Klijent klijent) {
+    	if(klijent == null)
+    		throw new NullPointerException("Klijent ne sme biti null");
         this.klijent = klijent;
     }
 
@@ -193,6 +207,8 @@ public class Termin extends AbstractDomainObject implements Serializable {
     }
 
     public void setTipPrevoza(TipPrevoza tipPrevoza) {
+    	if(tipPrevoza == null)
+    		throw new NullPointerException("Tip prevoza ne sme biti null");
         this.tipPrevoza = tipPrevoza;
     }
 
@@ -201,6 +217,8 @@ public class Termin extends AbstractDomainObject implements Serializable {
     }
 
     public void setAranzman(Aranzman aranzman) {
+    	if(aranzman == null)
+    		throw new NullPointerException("Aranzman ne sme biti null");
         this.aranzman = aranzman;
     }
 

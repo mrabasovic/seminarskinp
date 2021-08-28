@@ -68,6 +68,9 @@ public class Hotel extends AbstractDomainObject implements Serializable{
     }
 
     public void setHotelID(Long hotelID) {
+    	if(hotelID == null) {
+    		throw new NullPointerException("ID Hotela ne sme biti null");
+    	}
         this.hotelID = hotelID;
     }
 
@@ -76,6 +79,8 @@ public class Hotel extends AbstractDomainObject implements Serializable{
     }
 
     public void setNazivHotela(String nazivHotela) {
+    	if(nazivHotela == null)
+    		throw new NullPointerException("Ne sme biti null!");
         this.nazivHotela = nazivHotela;
     }
 
@@ -84,6 +89,8 @@ public class Hotel extends AbstractDomainObject implements Serializable{
     }
 
     public void setGrad(String grad) {
+    	if(grad == null)
+    		throw new NullPointerException("Naziv grada ne sme biti null!");
         this.grad = grad;
     }
 

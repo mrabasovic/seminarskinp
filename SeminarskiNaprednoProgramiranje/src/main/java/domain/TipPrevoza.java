@@ -64,6 +64,8 @@ public class TipPrevoza extends AbstractDomainObject implements Serializable{
     }
 
     public void setTipPrevozaID(Long tipPrevozaID) {
+    	if(tipPrevozaID == null)
+    		throw new NullPointerException("ID tipa prevoza ne sme biti null");
         this.tipPrevozaID = tipPrevozaID;
     }
 
@@ -72,6 +74,8 @@ public class TipPrevoza extends AbstractDomainObject implements Serializable{
     }
 
     public void setOpis(String opis) {
+    	if(opis == null)
+    		throw new NullPointerException("Opis tipa prevoza ne sme biti null");
         this.opis = opis;
     }
 

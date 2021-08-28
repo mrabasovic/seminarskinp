@@ -97,6 +97,8 @@ public class Klijent extends AbstractDomainObject implements Serializable{
     }
 
     public void setKlijentID(Long klijentID) {
+    	if(klijentID == null)
+    		throw new NullPointerException("ID klijenta ne sme biti null");
         this.klijentID = klijentID;
     }
 
@@ -105,6 +107,11 @@ public class Klijent extends AbstractDomainObject implements Serializable{
     }
 
     public void setIme(String ime) {
+    	if(ime == null){
+    		throw new NullPointerException("Ime klijenta ne sme biti null");
+    	}
+    	if(ime.length() < 2)
+    		throw new RuntimeException("Klijentovo ime mora biti duze od 1 slova");
         this.ime = ime;
     }
 
@@ -113,6 +120,11 @@ public class Klijent extends AbstractDomainObject implements Serializable{
     }
 
     public void setPrezime(String prezime) {
+    	if(prezime == null){
+    		throw new NullPointerException("Prezime klijenta ne sme biti null");
+    	}
+    	if(prezime.length() < 2)
+    		throw new RuntimeException("Klijentovo prezime mora biti duze od 1 slova");
         this.prezime = prezime;
     }
 
@@ -121,6 +133,8 @@ public class Klijent extends AbstractDomainObject implements Serializable{
     }
 
     public void setBrojTelefona(String brojTelefona) {
+    	if(brojTelefona.length() != 10)
+    		throw new RuntimeException("Klijentov telefon mora biti tacno 10 cifara");
         this.brojTelefona = brojTelefona;
     }
 
@@ -129,6 +143,10 @@ public class Klijent extends AbstractDomainObject implements Serializable{
     }
 
     public void setEmail(String email) {
+    	if(email == null)
+    		throw new NullPointerException("Email ne sme biti null");
+    	if(!(email.contains("@")))
+    		throw new RuntimeException("Email mora sadrzati @");
         this.email = email;
     }
 

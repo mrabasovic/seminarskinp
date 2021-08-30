@@ -13,22 +13,69 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
-
+/**
+ * Klasa predstavlja termin.
+ * Termin ima atribute aranzman tipa Aranzman, terminID tipa int, datumOd tipa date, datumDo tipa Date, cenaBezPDV tipa double, poreskaStopa tipa Double, cenaSaPDV tipa double, klijent tipa Klijent, tipPrevoza tipa TipPrevoza.
+ * @author mladen
+ *
+ */
 public class Termin extends AbstractDomainObject implements Serializable {
 
+	/**
+	 * aranzman termina kao Aranzman
+	 */
     private Aranzman aranzman;
+    /**
+     * ID termina kao int
+     */
     private int terminID;
+    /**
+     * datumOd kao Date
+     */
     private Date datumOd;
+    /**
+     * datumDo kao Date
+     */
     private Date datumDo;
+    /**
+     * cenaBezPDV kao double
+     */
     private double cenaBezPDV;
+    /**
+     * poreskaStopa kao double
+     */
     private double poreskaStopa;
+    /**
+     * cenaSaPDV kao double
+     */
     private double cenaSaPDV;
+    /**
+     * klijent kao Klijent
+     */
     private Klijent klijent;
+    /**
+     * tipPrevoza kao TipPrevoza
+     */
     private TipPrevoza tipPrevoza;
-
+    /**
+     * Neparametarski konstruktor koji inicijalizuje objekat
+     */
     public Termin() {
     }
 
+    /**
+     * Konstruktor koji inicijalizuje objekat i postavlja vrednosti za aranzman, terminID, datumOd
+     * datumDo, cenaBezPDV, poreskaStopa, cenaSaPDV, klijent, tipPrevoza
+     * @param aranzman aranzman termina kao Aranzman
+     * @param terminID ID termina kao int
+     * @param datumOd datum od termina kao Date
+     * @param datumDo datum do termina kao Date
+     * @param cenaBezPDV cena bez pdv-a termina kao double
+     * @param poreskaStopa poreska stopa termina kao double
+     * @param cenaSaPDV cena sa pdv-om termina kao double
+     * @param klijent klijent termina kao Klijent
+     * @param tipPrevoza tip prevoza termina kao TipPrevoza
+     */
     public Termin(Aranzman aranzman, int terminID, Date datumOd, Date datumDo, double cenaBezPDV, double poreskaStopa, double cenaSaPDV, Klijent klijent, TipPrevoza tipPrevoza) {
         this.aranzman = aranzman;
         this.terminID = terminID;
@@ -40,7 +87,9 @@ public class Termin extends AbstractDomainObject implements Serializable {
         this.klijent = klijent;
         this.tipPrevoza = tipPrevoza;
     }
-
+    /** Vraca upit za select
+     * @return upit koji je tipa String
+     */
     @Override
     public String vratiUpitZaSve() {
         return "SELECT * FROM TERMIN T "
@@ -50,7 +99,9 @@ public class Termin extends AbstractDomainObject implements Serializable {
                 + "JOIN HOTEL H ON (H.HOTELID = A.HOTELID) "
                 + "JOIN KLIJENT K ON (K.KLIJENTID = T.KLIJENTID)";
     }
-
+    /** Vraca listu Termina iz baze.
+     * @return lista Lista termina.
+     */
     @Override
     public ArrayList<AbstractDomainObject> vratiListu(ResultSet rs) throws SQLException {
         ArrayList<AbstractDomainObject> lista = new ArrayList<>();
@@ -82,7 +133,10 @@ public class Termin extends AbstractDomainObject implements Serializable {
         rs.close();
         return lista;
     }
-
+    /**
+     * Vraca upit za ubacivanje novog termina u bazu.
+     * @return ps
+     */
     @Override
     public PreparedStatement vratiUpitZaUbacivanje(Connection con) throws SQLException {
         PreparedStatement ps = 
@@ -103,7 +157,10 @@ public class Termin extends AbstractDomainObject implements Serializable {
         
         return ps;
     }
-
+    /**
+     * Vraca upit za izmenu termina u bazi.
+     * @return ps
+     */
     @Override
     public PreparedStatement vratiUpitZaIzmenu(Connection con) throws SQLException {
         PreparedStatement ps = 
@@ -121,7 +178,10 @@ public class Termin extends AbstractDomainObject implements Serializable {
         
         return ps;
     }
-
+    /**
+     * Vraca upit za brisanje termina u bazi.
+     * @return ps
+     */
     @Override
     public PreparedStatement vratiUpitZaBrisanje(Connection con) throws SQLException {
         PreparedStatement ps = 
@@ -131,91 +191,154 @@ public class Termin extends AbstractDomainObject implements Serializable {
         
         return ps;
     }
-
+    /**
+     * Vraca id termina
+     * @return ID termina kao int
+     */
     public int getTerminID() {
         return terminID;
     }
-
+    /**
+     * Postavlja ID termina na novu vrednost.
+     * @param klijentID ID termina kao int.
+     * @throws java.lang.RuntimeException ako je uneti ID negativan broj
+     */
     public void setTerminID(int terminID) {
     	if(terminID < 0)
     		throw new RuntimeException("ID termina ne sme biti negativan broj");
         this.terminID = terminID;
     }
-
+    /**
+     * Vraca datumOd termina
+     * @return datumOd kao Date
+     */
     public Date getDatumOd() {
         return datumOd;
     }
-
+    /**
+     * Postavlja datumOd termina na novu vrednost.
+     * @param datumOd datumOd termina kao Date
+     * @throws java.lang.NullPointerException ako je uneti datumOd null
+     */
     public void setDatumOd(Date datumOd) {
     	if(datumOd == null)
     		throw new NullPointerException("DatumOd ne sme biti null");
         this.datumOd = datumOd;
     }
-
+    /**
+     * Vraca datumDo termina
+     * @return datumDo kao Date
+     */
     public Date getDatumDo() {
         return datumDo;
     }
-
+    /**
+     * Postavlja datumDo termina na novu vrednost.
+     * @param datumOd datumDo termina kao Date
+     * @throws java.lang.NullPointerException ako je uneti datumDo null
+     */
     public void setDatumDo(Date datumDo) {
     	if(datumDo == null)
     		throw new NullPointerException("DatumDo ne sme biti null");
         this.datumDo = datumDo;
     }
-
+    /**
+     * Vraca cenu bez pdv-a
+     * @return cenaBezPDV termina kao String
+     */
     public double getCenaBezPDV() {
         return cenaBezPDV;
     }
-
+    /**
+     * Postavlja cenu bez pdv-a na novu vrednost.
+     * @param cenaBezPDV termina kao double.
+     * @throws java.lang.RuntimeException ako je uneta cenaBezPDV negativan broj
+     */
     public void setCenaBezPDV(double cenaBezPDV) {
     	if(cenaBezPDV < 0)
     		throw new RuntimeException("Cena mora biti pozitivan broj");
         this.cenaBezPDV = cenaBezPDV;
     }
-
+    /**
+     * Vraca poresku stopu termina
+     * @return poreskaStopa kao double
+     */
     public double getPoreskaStopa() {
         return poreskaStopa;
     }
-
+    /**
+     * Postavlja poresku stopu na novu vrednost.
+     * @param poreskaStopa termina kao double.
+     * @throws java.lang.RuntimeException ako je uneta poreskaStopa negativan broj
+     */
     public void setPoreskaStopa(double poreskaStopa) {
     	if(poreskaStopa < 0)
     		throw new RuntimeException("Poreska stopa mora biti pozitivan broj");
         this.poreskaStopa = poreskaStopa;
     }
-
+    /**
+     * Vraca cenu sa pdv-om
+     * @return cenaSaPDV termina kao String
+     */
     public double getCenaSaPDV() {
         return cenaSaPDV;
     }
-
+    /**
+     * Postavlja cenu sa pdv-om na novu vrednost.
+     * @param cenaSaPDV termina kao double.
+     * @throws java.lang.RuntimeException ako je uneta cenaSaPDV negativan broj
+     */
     public void setCenaSaPDV(double cenaSaPDV) {
     	if(cenaSaPDV < 0)
     		throw new RuntimeException("Cena mora biti pozitivan broj");
         this.cenaSaPDV = cenaSaPDV;
     }
-
+    /**
+     * Vraca klijenta
+     * @return klijent termina kao Klijent
+     */
     public Klijent getKlijent() {
         return klijent;
     }
-
+    /**
+     * Postavlja klijenta termina na novu vrednost.
+     * @param klijent klijent termina kao Klijent
+     * @throws java.lang.NullPointerException ako je uneti klijent null
+     */
     public void setKlijent(Klijent klijent) {
     	if(klijent == null)
     		throw new NullPointerException("Klijent ne sme biti null");
         this.klijent = klijent;
     }
-
+    /**
+     * Vraca tip prevoza
+     * @return tipPrevoza termina kao TipPrevoza
+     */
     public TipPrevoza getTipPrevoza() {
         return tipPrevoza;
     }
-
+    /**
+     * Postavlja tip prevoza termina na novu vrednost.
+     * @param tipPrevoza tip prevoza termina kao TipPrevoza
+     * @throws java.lang.NullPointerException ako je uneti tip prevoza null
+     */
     public void setTipPrevoza(TipPrevoza tipPrevoza) {
     	if(tipPrevoza == null)
     		throw new NullPointerException("Tip prevoza ne sme biti null");
         this.tipPrevoza = tipPrevoza;
     }
-
+    /**
+     * Vraca aranzman
+     * @return aranzman termina kao Aranzman
+     */
     public Aranzman getAranzman() {
         return aranzman;
     }
-
+    /**
+     * Postavlja aranzman termina na novu vrednost.
+     * @param aranzman aranzman termina kao Aranzman
+     * @throws java.lang.NullPointerException ako je uneti aranzman null
+     */
     public void setAranzman(Aranzman aranzman) {
     	if(aranzman == null)
     		throw new NullPointerException("Aranzman ne sme biti null");

@@ -92,15 +92,36 @@ public class DBBroker {
 
 	public static ArrayList<Termin> vratiTermine() {
 		ArrayList<Termin> lista = new ArrayList<>();
-        String upit = "SELECT * FROM Termin";
+        String upit = "SELECT * FROM TERMIN T "
+                + "JOIN ARANZMAN A ON (A.ARANZMANID = T.ARANZMANID) "
+                + "JOIN TIPPREVOZA TP ON (TP.TIPPREVOZAID = T.TIPPREVOZAID) "
+                + "JOIN VODIC V ON (A.VODICID = V.VODICID) "
+                + "JOIN HOTEL H ON (H.HOTELID = A.HOTELID) "
+                + "JOIN KLIJENT K ON (K.KLIJENTID = T.KLIJENTID)";
         try {
             Statement st = Konekcija.getInstance().getConnection().createStatement();
             ResultSet rs = st.executeQuery(upit);
             while(rs.next()){
-            	//Aranzman a = new Aranzman(null, upit, null, null, lista)
-            	//Termin t = new Termin(a, 0, null, null, 0, 0, 0, null, null)
-            	//Aranzman a = new Aranzman(null, upit, null, null, lista)
-                //lista.add(v);
+            	Hotel h = new Hotel(rs.getLong("HotelID"), rs.getString("NazivHotela"),
+                        rs.getString(11));
+
+                Vodic v = new Vodic(rs.getLong("VodicID"),
+                        rs.getString(17), rs.getString(18),
+                        rs.getString(19), rs.getString(20), rs.getInt("GodineIskustva"));
+
+                Aranzman a = new Aranzman(rs.getLong("AranzmanID"), rs.getString("Opis"), v, h, null);
+
+                TipPrevoza tp = new TipPrevoza(rs.getLong("TipPrevozaID"), rs.getString(15));
+                
+                Klijent k = new Klijent(rs.getLong("KlijentID"),
+                        rs.getString(26), rs.getString(27), 
+                        rs.getString(28), rs.getString(29));
+
+                Termin t = new Termin(a, rs.getInt("TerminID"), rs.getDate("DatumOd"),
+                        rs.getDate("DatumDo"), rs.getDouble("CenaBezPDV"), rs.getDouble("PoreskaStopa"),
+                        rs.getDouble("CenaSaPDV"), k, tp);
+
+                lista.add(t);
             }
         } catch (SQLException ex) {
             Logger.getLogger(DBBroker.class.getName()).log(Level.SEVERE, null, ex);

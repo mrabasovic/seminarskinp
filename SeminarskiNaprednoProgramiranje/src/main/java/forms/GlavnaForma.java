@@ -8,13 +8,21 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
 import controller.Controller;
 
 import javax.swing.JComboBox;
 import domain.*;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
 
 public class GlavnaForma extends JFrame {
 
@@ -47,6 +55,8 @@ public class GlavnaForma extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		
 		
 		JComboBox cmbHoteli = new JComboBox();
 		cmbHoteli.setBounds(29, 20, 145, 27);
@@ -101,6 +111,15 @@ public class GlavnaForma extends JFrame {
 		contentPane.add(btnDodajAranzman);
 		btnDodajAranzman.setText("Dodaj aranzman");
 		
+		JLabel cenaLbl = new JLabel("New label");
+		cenaLbl.setBounds(218, 170, 203, 16);
+		contentPane.add(cenaLbl);
+		cenaLbl.setText("Cena u din: ");
+		
+		JLabel cenaEurLbl = new JLabel("New label");
+		cenaEurLbl.setBounds(215, 204, 206, 16);
+		contentPane.add(cenaEurLbl);
+		cenaEurLbl.setText("Cena u EUR: ");
 		//popuniHotele
 		cmbHoteli.removeAllItems();
 		ArrayList<Hotel> listaHotela = Controller.getInstance().vratiHotele();
@@ -121,6 +140,7 @@ public class GlavnaForma extends JFrame {
 		for (Termin t : termini) {
 			cmbTermin.addItem(t);
 		}
+		cenaEurLbl.setText("Cena u EUR: "+termini.get(0).getCenaSaPDV());
 		// popuni tipove prevoza
 		cmbTipPrevoza.removeAllItems();
 		ArrayList<TipPrevoza> listaPrevoza = Controller.getInstance().vratiPrevoz();
@@ -133,6 +153,48 @@ public class GlavnaForma extends JFrame {
 		for (Klijent k : klijenti) {
 			cmbKlijent.addItem(k);
 		}
+		
+		
+		// API
+		
+		String base_url = "http://api.currencylayer.com";
+		String api_key = "31373032763246a143fc1bae4f30e9f1";
+		
+		
+		try {
+			Gson gson = new Gson();
+			URL url = new URL(base_url+"/live?access_key="+api_key);
+			HttpURLConnection con = (HttpURLConnection) url.openConnection();
+			con.setRequestMethod("GET");
+			
+			BufferedReader reader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+			JsonObject rez = gson.fromJson(reader, JsonObject.class);
+			double kurs = rez.get("quotes").getAsJsonObject().get("USDRSD").getAsDouble();
+			String rezultat = String.format("%.1f",termini.get(0).getCenaSaPDV()*kurs);
+			cenaLbl.setText("Cena u din: "+rezultat);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 	}
 }

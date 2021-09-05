@@ -91,6 +91,12 @@ public class DodajVodicaForma extends JDialog {
 		txtGodIsk.setBounds(119, 157, 130, 26);
 		contentPanel.add(txtGodIsk);
 		txtGodIsk.setColumns(10);
+		
+		lblIme.setText("Ime");
+		lblPrezime.setText("Prezime");
+		lblEmai.setText("Email");
+		lblGodineIsk.setText("Godine iskustva");
+		lblTelefon.setText("Telefon");
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));

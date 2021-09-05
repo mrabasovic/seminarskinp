@@ -23,6 +23,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class GlavnaForma extends JFrame {
 
@@ -79,6 +80,7 @@ public class GlavnaForma extends JFrame {
 		contentPane.add(cmbVodic);
 		
 		JComboBox cmbTermin = new JComboBox();
+		
 		cmbTermin.setBounds(29, 117, 145, 27);
 		contentPane.add(cmbTermin);
 		
@@ -89,10 +91,6 @@ public class GlavnaForma extends JFrame {
 		JComboBox cmbKlijent = new JComboBox();
 		cmbKlijent.setBounds(29, 200, 141, 27);
 		contentPane.add(cmbKlijent);
-		
-		JButton btnDodajTermin = new JButton("New button");
-		btnDodajTermin.setBounds(208, 118, 117, 29);
-		contentPane.add(btnDodajTermin);
 		
 		JButton btnDodajAranzman = new JButton("New button");
 		btnDodajAranzman.addActionListener(new ActionListener() {
@@ -105,6 +103,7 @@ public class GlavnaForma extends JFrame {
 				Klijent k = (Klijent) cmbKlijent.getSelectedItem();
 				ArrayList<Termin> termini = new ArrayList<>();
 				Aranzman a = new Aranzman(++aranzmanID, h.getGrad(), v, h, termini);
+				
 			}
 		});
 		btnDodajAranzman.setBounds(304, 237, 117, 29);
@@ -140,7 +139,8 @@ public class GlavnaForma extends JFrame {
 		for (Termin t : termini) {
 			cmbTermin.addItem(t);
 		}
-		cenaEurLbl.setText("Cena u EUR: "+termini.get(0).getCenaSaPDV());
+		//cenaEurLbl.setText("Cena u EUR: "+termini.get(0).getCenaSaPDV());
+		cenaEurLbl.setText("Cena u EUR: "+((Termin)cmbTermin.getSelectedItem()).getCenaSaPDV());
 		// popuni tipove prevoza
 		cmbTipPrevoza.removeAllItems();
 		ArrayList<TipPrevoza> listaPrevoza = Controller.getInstance().vratiPrevoz();

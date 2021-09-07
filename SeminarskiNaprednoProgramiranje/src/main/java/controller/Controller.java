@@ -32,17 +32,17 @@ public class Controller {
 	}
 
 	public ArrayList<TipPrevoza> vratiPrevoz() {
-		// TODO Auto-generated method stub
+
 		return DBBroker.vratiPrevoz();
 	}
 
 	public ArrayList<Termin> vratiTermine() {
-		// TODO Auto-generated method stub
+
 		return DBBroker.vratiTermine();
 	}
 
 	public ArrayList<Klijent> vratiKlijente() {
-		// TODO Auto-generated method stub
+
 		return DBBroker.vratiKlijente();
 	}
 }

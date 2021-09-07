@@ -11,6 +11,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,6 +20,12 @@ public class DBBroker {
     private static DBBroker instance;
     private Connection connection;
 
+    private LinkedList<Hotel> hoteli = new LinkedList<Hotel>();
+    private LinkedList<Vodic> vodici = new LinkedList<Vodic>();
+    private LinkedList<TipPrevoza> prevozi = new LinkedList<TipPrevoza>();
+    private LinkedList<Termin> termini = new LinkedList<Termin>();
+    private LinkedList<Klijent> klijenti = new LinkedList<Klijent>();
+    
     public DBBroker() {
         try {
             connection=
@@ -147,6 +154,54 @@ public class DBBroker {
         return lista;
 	}
     
+    public void dodajHotel(Hotel h) {
+    	if(h == null) {
+    		throw new NullPointerException("Hotel ne sme biti null");
+    	}
+    	if(hoteli.contains(h)){
+    		throw new RuntimeException("Hotel vec postoji");
+    	}
+    	hoteli.add(h);
+    }
     
+    public void dodajPrevoz(TipPrevoza tp) {
+    	if(tp == null) {
+    		throw new NullPointerException("Tip prevoza ne sme biti null");
+    	}
+    	if(prevozi.contains(tp)){
+    		throw new RuntimeException("Tip Prevoza vec postoji");
+    	}
+    	prevozi.add(tp);
+    }
+    
+    public void dodajTermin(Termin t) {
+    	if(t == null) {
+    		throw new NullPointerException("Termin ne sme biti null");
+    	}
+    	if(termini.contains(t)){
+    		throw new RuntimeException("Termin vec postoji");
+    	}
+    	termini.add(t);
+    }
+    
+    public void dodajVodica(Vodic v) {
+    	if(v == null) {
+    		throw new NullPointerException("Vodic ne sme biti null");
+    	}
+    	if(vodici.contains(v)){
+    		throw new RuntimeException("Vodic vec postoji");
+    	}
+    	vodici.add(v);
+    }
+    
+    public void dodajKlijenta(Klijent k) {
+    	if(k == null) {
+    		throw new NullPointerException("Klijent ne sme biti null");
+    	}
+    	if(klijenti.contains(k)){
+    		throw new RuntimeException("Klijent vec postoji");
+    	}
+    	klijenti.add(k);
+    }
     
 }
